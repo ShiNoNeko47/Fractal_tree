@@ -4,8 +4,7 @@ import pygame
 import math
 import sys
 
-def draw_tree(window, color, n, nmax, length, length_diff, angle, angle_diff, root):
-    recursion = True
+def draw_tree(window, color, n, length, length_diff, angle, angle_diff, root):
     if n == 0:
         pygame.display.update()
         return 0
@@ -14,10 +13,8 @@ def draw_tree(window, color, n, nmax, length, length_diff, angle, angle_diff, ro
         if event.type == pygame.QUIT:
             sys.exit()
     pygame.draw.line(window, (color), root, end, int(n / 4 + 1))
-    if recursion:
-        draw_tree(window, color, n-1, nmax, length * length_diff, length_diff, angle + angle_diff, angle_diff, end)
-    if recursion:
-        draw_tree(window, color, n-1, nmax, length * length_diff, length_diff, angle - angle_diff, angle_diff, end)
+    draw_tree(window, color, n-1, length * length_diff, length_diff, angle + angle_diff, angle_diff, end)
+    draw_tree(window, color, n-1, length * length_diff, length_diff, angle - angle_diff, angle_diff, end)
 
 def main():
     pygame.init()
@@ -27,10 +24,10 @@ def main():
 
     loop = True
     angle_diff = math.pi / 6
-    window.fill((0, 0, 0))
     while loop:
+        window.fill((0, 0, 0))
         #angle_diff -= math.pi / 512
-        draw_tree(window, list(color), 15, 17, 100, .8, -math.pi, angle_diff, (400, 600))
+        draw_tree(window, list(color), 15, 100, .8, -math.pi, angle_diff, (400, 600))
         pygame.display.update()
 
 if __name__ == '__main__':
