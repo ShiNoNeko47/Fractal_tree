@@ -7,13 +7,11 @@ import time
 
 def draw_tree(window, color, n, i, length, length_diff, angle, angle_diff, root):
     if n == 0:
-        #pygame.display.update()
         return 0
     end = (root[0] + math.sin(angle) * length, root[1] + math.cos(angle) * length)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-    #print(i, n)
     if i <= n:
         pygame.draw.line(window, (color), root, end, int((n - i) / 4 + 1))
         print(int(n - i + 1))
@@ -33,7 +31,6 @@ def main():
     angle_diff = math.pi / 6
     while loop:
         window.fill((0, 0, 0))
-        #angle_diff -= math.pi / 512
         n = 15
         for i in range(n):
             clock.tick(10)
