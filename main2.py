@@ -5,10 +5,12 @@ import math
 import sys
 import time
 
+
 def draw_tree(window, color, n, i, length, length_diff, angle, angle_diff, root):
     if n == 0:
         return 0
-    end = (root[0] + math.sin(angle) * length, root[1] + math.cos(angle) * length)
+    end = (root[0] + math.sin(angle) * length,
+           root[1] + math.cos(angle) * length)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -17,8 +19,11 @@ def draw_tree(window, color, n, i, length, length_diff, angle, angle_diff, root)
         print(int(n - i + 1))
         if i == n:
             return 0
-    draw_tree(window, color, n-1, i, length * length_diff, length_diff, angle + angle_diff, angle_diff, end)
-    draw_tree(window, color, n-1, i, length * length_diff, length_diff, angle - angle_diff, angle_diff, end)
+    draw_tree(window, color, n-1, i, length * length_diff,
+              length_diff, angle + angle_diff, angle_diff, end)
+    draw_tree(window, color, n-1, i, length * length_diff,
+              length_diff, angle - angle_diff, angle_diff, end)
+
 
 def main():
     pygame.init()
@@ -35,10 +40,11 @@ def main():
         for i in range(n):
             clock.tick(10)
             print(i)
-            draw_tree(window, list(color), n, n - i, 100, .8, -math.pi, angle_diff, (400, 600))
+            draw_tree(window, list(color), n, n - i,
+                      100, .8, -math.pi, angle_diff, (400, 600))
             pygame.display.update()
         time.sleep(1)
 
+
 if __name__ == '__main__':
     main()
-
